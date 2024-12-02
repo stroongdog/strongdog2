@@ -1,37 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Site Redirector</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <div id="redirect-message"></div>
-  <script>
-    (function() {
-      // Define site groups with main site and aliases
-      const siteGroups = [
-        {
-          mainSite: "https://mathcord.netlify.app",
-          aliasHostnames: [
-            "mathcord2.netlify.app",
-            "mathcord3.netlify.app",
-          ],
-        },
-        {
-          mainSite: "https://strongdog.netlify.app",
-          aliasHostnames: [
-            "strongdog2.netlify.app",
-            "strongdog3.netlify.app",
-          ],
-        },
-        {
-          mainSite: "https://stroongdog.netlify.app",
-          aliasHostnames: [
-            "stroongdog2.netlify.app",
-            "stroongdog3.netlify.app",
-          ],
-        },
+  <head>
+    <meta charset="UTF-8" />
+    <title>Site Redirector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="redirect-message"></div>
+    <script>
+      (function () {
+        // Define site groups with main site and aliases
+        const siteGroups = [
         {
           mainSite: "https://jman1593.github.io",
           aliasHostnames: [],
@@ -81,62 +60,81 @@
             "/strongdog3",
           ],
         },
+        {
+          mainSite: "https://mathcordxp.github.io",
+          aliasHostnames: [],
+          aliasPaths: [
+            "/strongdog2",
+            "/strongdog3",
+          ],
+        },
+        {
+          mainSite: "https://stroongdog.github.io",
+          aliasHostnames: [],
+          aliasPaths: [
+            "/strongdog2",
+            "/strongdog3",
+          ],
+        },
       ];
 
-      // Get the current URL components
-      const currentUrl = new URL(window.location.href);
-      const currentHostname = currentUrl.hostname.toLowerCase();
-      const currentPathname = currentUrl.pathname;
+        // Get the current URL components
+        const currentUrl = new URL(window.location.href);
+        const currentHostname = currentUrl.hostname.toLowerCase();
+        const currentPathname = currentUrl.pathname;
 
-      let redirected = false;
-      let isApprovedDomain = false;
+        let redirected = false;
+        let isApprovedDomain = false;
 
-      for (const group of siteGroups) {
-        const mainSiteUrl = new URL(group.mainSite);
-        const mainHostname = mainSiteUrl.hostname.toLowerCase();
+        for (const group of siteGroups) {
+          const mainSiteUrl = new URL(group.mainSite);
+          const mainHostname = mainSiteUrl.hostname.toLowerCase();
 
-        // Check if current hostname is a main site
-        if (currentHostname === mainHostname) {
-          isApprovedDomain = true;
-          // Check if current path is an alias path
-          if (group.aliasPaths) {
-            for (const aliasPath of group.aliasPaths) {
-              if (currentPathname.startsWith(aliasPath)) {
-                // Redirect to the main site (without the alias path)
-                window.location.href = group.mainSite;
-                redirected = true;
-                break;
+          // Check if current hostname is a main site
+          if (currentHostname === mainHostname) {
+            isApprovedDomain = true;
+            // Check if current path is an alias path
+            if (group.aliasPaths) {
+              for (const aliasPath of group.aliasPaths) {
+                if (currentPathname.startsWith(aliasPath)) {
+                  // Redirect to the main site (without the alias path)
+                  window.location.href = group.mainSite;
+                  redirected = true;
+                  break;
+                }
               }
             }
+            // If not an alias path, no redirection needed
+            break;
           }
-          // If not an alias path, no redirection needed
-          break;
+
+          // Check if current hostname is an alias hostname
+          if (
+            group.aliasHostnames &&
+            group.aliasHostnames.includes(currentHostname)
+          ) {
+            isApprovedDomain = true;
+            // Redirect to the main site
+            window.location.href = group.mainSite;
+            redirected = true;
+            break;
+          }
         }
 
-        // Check if current hostname is an alias hostname
-        if (group.aliasHostnames && group.aliasHostnames.includes(currentHostname)) {
-          isApprovedDomain = true;
-          // Redirect to the main site
-          window.location.href = group.mainSite;
-          redirected = true;
-          break;
-        }
-      }
-
-      if (!redirected && !isApprovedDomain) {
-        // Display all the main domains
-        const redirectMessage = document.getElementById("redirect-message");
-        redirectMessage.innerHTML =
-          "<h1>Available Main Sites:</h1><ul>" +
-          siteGroups
-            .map(
-              (group) => `
+        if (!redirected && !isApprovedDomain) {
+          // Display all the main domains
+          const redirectMessage = document.getElementById("redirect-message");
+          redirectMessage.innerHTML =
+            "<h1>Available Main Sites:</h1><ul>" +
+            siteGroups
+              .map(
+                (group) => `
             <li><a href="${group.mainSite}" target="_blank">${group.mainSite}</a></li>`
-            )
-            .join("") +
-          "</ul>";
-      }
-    })();
-  </script>
-</body>
+              )
+              .join("") +
+            "</ul>";
+        }
+      })();
+    </script>
+  </body>
 </html>
