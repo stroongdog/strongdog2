@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head><base href="//www.coolmathgames.com/sites/default/files/public_games/26748/"/><meta content="noindex" name="robots"/><link href="http://www.coolmathgames.com/0-checkers" rel="canonical"/>
+<title></title>
+<link href="css/reset.css" rel="stylesheet" type="text/css"/>
+<link href="css/main.css" rel="stylesheet" type="text/css"/>
+<link href="css/ios_fullscreen.css" rel="stylesheet" type="text/css"/>
+<link href="css/ctl-multiplayer-icons.css" rel="stylesheet" type="text/css"/>
+<link href="css/animation.css" rel="stylesheet" type="text/css"/>
+<link href="css/ctl-multiplayer.css" rel="stylesheet" type="text/css"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" name="viewport">
+<meta content="no" name="msapplication-tap-highlight">
+<script src="js/lib/PlayerIOClient.development.js" type="text/javascript"></script>
+<script src="js/lib/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/lib/createjs.min.js" type="text/javascript"></script>
+<script src="js/lib/howler.min.js" type="text/javascript"></script>
+<script src="js/lib/screenfull.js" type="text/javascript"></script>
+<script src="js/lib/platform.js" type="text/javascript"></script>
+<script src="js/lib/ios_fullscreen.js" type="text/javascript"></script>
+<script src="js/lib/TreeModel.js" type="text/javascript"></script>
+<script src="js/settings.js" type="text/javascript"></script>
+<script src="js/lib/ctl-multiplayer.js" type="text/javascript"></script>
+<script src="js/lib/ctl_utils.js" type="text/javascript"></script>
+<script src="js/lib/sprite_lib.js" type="text/javascript"></script>
+<script src="js/lib/CTextButton.js" type="text/javascript"></script>
+<script src="js/lib/CToggle.js" type="text/javascript"></script>
+<script src="js/lib/CGfxButton.js" type="text/javascript"></script>
+<script src="js/lib/CNetworkManager.js" type="text/javascript"></script>
+<script src="js/lib/CNetworkMessageForwarder.js" type="text/javascript"></script>
+<script src="js/lib/CTLText.js" type="text/javascript"></script>
+<script src="js/lib/CRadialWipeWidget.js" type="text/javascript"></script>
+<script src="js/lib/CTremble.js" type="text/javascript"></script>
+<script src="js/CTree.js" type="text/javascript"></script>
+<script src="js/CTreeDecision.js" type="text/javascript"></script>
+<script src="js/CLang.js" type="text/javascript"></script>
+<script src="js/CPreloader.js" type="text/javascript"></script>
+<script src="js/CCreditsPanel.js" type="text/javascript"></script>
+<script src="js/CMain.js" type="text/javascript"></script>
+<script src="js/CMessage.js" type="text/javascript"></script>
+<script src="js/CMenu.js" type="text/javascript"></script>
+<script src="js/CModeMenu.js" type="text/javascript"></script>
+<script src="js/CGameBase.js" type="text/javascript"></script>
+<script src="js/CGameSingle.js" type="text/javascript"></script>
+<script src="js/CGameMulti.js" type="text/javascript"></script>
+<script src="js/CGameSingleWithBot.js" type="text/javascript"></script>
+<script src="js/CInterface.js" type="text/javascript"></script>
+<script src="js/CStartAnimation.js" type="text/javascript"></script>
+<script src="js/CInfoTurn.js" type="text/javascript"></script>
+<script src="js/CThinking.js" type="text/javascript"></script>
+<script src="js/CEndPanel.js" type="text/javascript"></script>
+<script src="js/CCell.js" type="text/javascript"></script>
+<script src="js/CMovingCell.js" type="text/javascript"></script>
+<script src="js/CAreYouSurePanel.js" type="text/javascript"></script>
+<script src="js/CMsgBox.js" type="text/javascript"></script>
+<script src="js/CMoveTimeController.js" type="text/javascript"></script>
+<script src="js/CAIController.js" type="text/javascript"></script>
+<style type="text/css">
+            .no-select {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+            }
+          </style>
+<script type="text/javascript">
+            setTimeout(function(){
+              if(document.getElementsByTagName("canvas").length) {
+                document.getElementsByTagName("body")[0].classList.add("no-select")
+              }
+            }, 2000);
+          </script>
+<script type="text/javascript">
+          function setUserAgent(window, userAgent) {
+           // Works on Firefox, Chrome, Opera and IE9+
+            if (navigator.__defineGetter__) {
+                navigator.__defineGetter__("userAgent", function () {
+                    return userAgent;
+                });
+            } else if (Object.defineProperty) {
+                Object.defineProperty(navigator, "userAgent", {
+                    get: function () {
+                        return userAgent;
+                    }
+                });
+            }
+            // Works on Safari
+            if (window.navigator.userAgent !== userAgent) {
+                var userAgentProp = {
+                    get: function () {
+                        return userAgent;
+                    }
+                };
+                try {
+                    Object.defineProperty(window.navigator, "userAgent", userAgentProp);
+                } catch (e) {
+                    window.navigator = Object.create(navigator, {
+                        userAgent: userAgentProp
+                    });
+                }
+            }
+          }
+          if(window.navigator.userAgent.indexOf("Safari")>=0 && "ontouchstart" in window && window.navigator.userAgent.indexOf("iPhone")== -1) {
+            //var userAgent = window.navigator.userAgent.replace("Macintosh", "iPad");
+            var userAgent = "Mozilla/5.0 (iPad; CPU OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1";
+            setUserAgent(window,userAgent);
+          }
+          </script>
+</meta></meta></head>
+<body ondragstart="return false;" ondrop="return false;">
+<div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+<script>
+            $(document).ready(function(){
+                     var oMain = new CMain({
+
+                                           });
+                                           
+                                           
+                     $(oMain).on("start_session", function(evt) {
+                            if(getParamValue('ctl-arcade') === "true"){
+                                parent.__ctlArcadeStartSession();
+                            }
+                            //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                     
+                    $(oMain).on("end_session", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeEndSession();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                    
+                    $(oMain).on("save_score", function(evt,iWinner, iBlackTime, iWhiteTime, s_iGameType, iWhiteScore) {
+							// iWinner: 
+							// -1 IS DRAW
+							//0 WHITE WINS
+							//1 BLACK WINS
+							//2 WHITE WINS CAUSE BLACK CAN'T MOVE
+							//3 BLACK WINS CAUSE WHITE CAN'T MOVE
+							
+                            //alert("iBlackPoints: "+iBlackPoints+", iWhitePoints: "+iWhitePoints+", iBlackTime: "+iBlackTime+", iWhiteTime: "+iWhiteTime);
+                            if(getParamValue('ctl-arcade') === "true" && s_iGameType === 1 && iWinner === 0){
+                               parent.__ctlArcadeSaveScore({score:iWhiteScore, szMode: s_iGameType+""});
+                           }
+                     });
+                     
+                     $(oMain).on("share_event", function(evt, iScore, s_iGameType, iWinner) {
+                           if(getParamValue('ctl-arcade') === "true" && s_iGameType === 1 && iWinner === 0){
+                               parent.__ctlArcadeShareEvent({   img: TEXT_SHARE_IMAGE,
+                                                                title: TEXT_SHARE_TITLE,
+                                                                msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                                                                msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1});
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+
+                    $(oMain).on("show_interlevel_ad", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShowInterlevelAD();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                     
+                     if(isIOS()){ 
+                        setTimeout(function(){sizeHandler();},200); 
+                    }else{
+                        sizeHandler(); 
+                    }
+           });
+
+           function on_ctl_multiplayer_send_nickname(){
+                var szNickname = jQuery('input[name=nickname]').val();
+  
+                g_oCTLMultiplayer.setNickName(szNickname);
+                
+                s_oNetworkManager.login(szNickname);
+            }           
+
+            function on_ctl_multiplayer_send_password(){
+                
+                var oNodePassword = jQuery( '#'+ g_oCTLMultiplayer._idCurDialog + ' input[name=password]');
+                
+                var szRoomName = oNodePassword.attr("data-room-name");
+                var szPassword = oNodePassword.val();
+                
+                s_oNetworkManager.tryJoinRoomWithPass(szRoomName, szPassword);
+            }  
+
+            function on_ctl_multiplayer_join_room_with_password(){  
+                g_oCTLMultiplayer.closeAllDialog();
+                g_oCTLMultiplayer.showLoading(TEXT_NETWORK_CONNECTING);
+            }
+            
+            function on_ctl_multiplayer_show_create_match(){
+                g_oCTLMultiplayer.closeAllDialog();
+                g_oCTLMultiplayer.showCreateRoom();
+            }
+
+            function on_ctl_multiplayer_join_quick_match(){
+                g_oCTLMultiplayer.closeAllDialog();
+                
+                s_oNetworkManager.joinQuickMatch();
+            }
+
+            function on_ctl_multiplayer_close_type_room_password(){
+                g_oCTLMultiplayer.closeAllDialog();
+                s_oNetworkManager.gotoLobby();
+            }
+
+            function on_ctl_multiplayer_close_create_room(){
+                g_oCTLMultiplayer.closeAllDialog();
+                s_oNetworkManager.gotoLobby();
+                
+            }
+            
+            function on_ctl_multiplayer_refresh_room_list(){
+                s_oNetworkManager.gotoLobby();
+            }
+
+            function on_ctl_multiplayer_create_room(){
+                var szRoomname = jQuery('input[name=roomname]').val();
+                var szPassword = jQuery('input[name=password]').val();
+
+                s_oNetworkManager.tryCreateUniqueRoom(szRoomname, szPassword);
+                
+                g_oCTLMultiplayer.showLoading(TEXT_NETWORK_CONNECTING);
+                
+            }
+            
+            function on_ctl_multiplayer_join_room(szRoomName){
+                s_oNetworkManager.joinRoom(szRoomName);
+            }
+            
+            function on_ctl_multiplayer_play_offline(){
+                s_oMenu.onPlayOffline();
+            }
+
+        </script>
+<div class="check-fonts">
+<p class="check-font-1">arialrounded</p>
+</div>
+<canvas class="ani_hack" height="1920" id="canvas" width="1280"> </canvas>
+<div class="orientation-msg-container" data-orientation="portrait"><p class="orientation-msg-text">Please rotate your device</p></div>
+<div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+<script>function fnSendMsg(evt){
+        	window.parent.postMessage('keypress-from-game', '*');
+        }
+        document.body.addEventListener('click', function(event) {
+          fnSendMsg(event);
+        });
+        document.addEventListener('keypress', function(event) {
+        	 fnSendMsg(event);
+        });
+        document.addEventListener('keydown', function (e) {
+        	 fnSendMsg(event);
+        });
+        document.addEventListener('keyup', function (e) {
+        	  fnSendMsg(event);
+        });
+        </script></body>
+</html>
